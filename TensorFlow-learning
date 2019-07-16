@@ -18,5 +18,7 @@ Matrix Operations
           r =tf.range(1,5,1)
           d =tf.diag(r)
           tf.matrix_transpose()
-   
+tf.matmul()   matrix multiplication
+
+   Tensor Types
    
