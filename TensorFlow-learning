@@ -1,0 +1,22 @@
+Tensorflow notebook
+tf.InteractiveSession
+Initializing constant tensors  tf.zeros()  tf.ones()
+    tf.zeros(2)
+    tf.Tensor.eval() a numpy.ndarray object 
+    a =tf.zeros((3,8))
+    a.eval()
+    tf.ones((2,3,4))
+tf.constant()
+tf.fill() tf.fill((2,3),value=7.)
+
+tf.random_normal((2,3),mean=0,stddev=1)
+tf.random_uniform((2,3),minval=3,maxval=4)
+Matrix Operations
+   tf.eye() tf.eye(4)
+   the identity matrix  matrices square matrces that are 0 everywhere except on the diagonal where they are 1
+   diagonal matrix  tf.range(start,limit,delta)
+          r =tf.range(1,5,1)
+          d =tf.diag(r)
+          tf.matrix_transpose()
+   
+   
