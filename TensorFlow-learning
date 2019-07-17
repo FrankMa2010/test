@@ -22,3 +22,146 @@ tf.matmul()   matrix multiplication
 
    Tensor Types
    
+Jupyter QtConsole 4.4.3
+Python 3.7.3 (default, Mar 27 2019, 17:13:21) [MSC v.1915 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.4.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import tensorflow as tf
+
+
+In [3]: tf.InteractiveSession()
+Out[3]: <tensorflow.python.client.session.InteractiveSession at 0x204b7b89f28>
+
+In [4]: a =tf.ones((2,3),dtype = tf.int32)
+
+In [5]: a.eval()
+Out[5]: 
+array([[1, 1, 1],
+       [1, 1, 1]])
+
+In [6]: b = tf.to_float(a)
+W0717 22:19:17.959577 12064 deprecation.py:323] From <ipython-input-6-9d1987487ecb>:1: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+
+In [7]: b.eval()
+Out[7]: 
+array([[1., 1., 1.],
+       [1., 1., 1.]], dtype=float32)
+
+In [8]: a.eval()
+Out[8]: 
+array([[1, 1, 1],
+       [1, 1, 1]])
+
+In [9]: type(a)
+Out[9]: tensorflow.python.framework.ops.Tensor
+
+In [10]: a = tf.ones(6)
+
+In [11]: a.eval()
+Out[11]: array([1., 1., 1., 1., 1., 1.], dtype=float32)
+
+In [12]: b =tf.reshape(a,(3,5))
+---------------------------------------------------------------------------
+InvalidArgumentError                      Traceback (most recent call last)
+C:\Anaconda3\lib\site-packages\tensorflow\python\framework\ops.py in _create_c_op(graph, node_def, inputs, control_inputs)
+   1863   try:
+-> 1864     c_op = c_api.TF_FinishOperation(op_desc)
+   1865   except errors.InvalidArgumentError as e:
+
+InvalidArgumentError: Cannot reshape a tensor with 6 elements to shape [3,5] (15 elements) for 'Reshape' (op: 'Reshape') with input shapes: [6], [2] and with input tensors computed as partial shapes: input[1] = [3,5].
+
+During handling of the above exception, another exception occurred:
+
+ValueError                                Traceback (most recent call last)
+<ipython-input-12-f2848954fd3c> in <module>
+----> 1 b =tf.reshape(a,(3,5))
+
+C:\Anaconda3\lib\site-packages\tensorflow\python\ops\gen_array_ops.py in reshape(tensor, shape, name)
+   9091   try:
+   9092     _, _, _op = _op_def_lib._apply_op_helper(
+-> 9093         "Reshape", tensor=tensor, shape=shape, name=name)
+   9094   except (TypeError, ValueError):
+   9095     result = _dispatch.dispatch(
+
+C:\Anaconda3\lib\site-packages\tensorflow\python\framework\op_def_library.py in _apply_op_helper(self, op_type_name, name, **keywords)
+    786         op = g.create_op(op_type_name, inputs, dtypes=None, name=scope,
+    787                          input_types=input_types, attrs=attr_protos,
+--> 788                          op_def=op_def)
+    789       return output_structure, op_def.is_stateful, op
+    790 
+
+C:\Anaconda3\lib\site-packages\tensorflow\python\util\deprecation.py in new_func(*args, **kwargs)
+    505                 'in a future version' if date is None else ('after %s' % date),
+    506                 instructions)
+--> 507       return func(*args, **kwargs)
+    508 
+    509     doc = _add_deprecated_arg_notice_to_docstring(
+
+C:\Anaconda3\lib\site-packages\tensorflow\python\framework\ops.py in create_op(***failed resolving arguments***)
+   3614           input_types=input_types,
+   3615           original_op=self._default_original_op,
+-> 3616           op_def=op_def)
+   3617       self._create_op_helper(ret, compute_device=compute_device)
+   3618     return ret
+
+C:\Anaconda3\lib\site-packages\tensorflow\python\framework\ops.py in __init__(self, node_def, g, inputs, output_types, control_inputs, input_types, original_op, op_def)
+   2025           op_def, inputs, node_def.attr)
+   2026       self._c_op = _create_c_op(self._graph, node_def, grouped_inputs,
+-> 2027                                 control_input_ops)
+   2028 
+   2029     # Initialize self._outputs.
+
+C:\Anaconda3\lib\site-packages\tensorflow\python\framework\ops.py in _create_c_op(graph, node_def, inputs, control_inputs)
+   1865   except errors.InvalidArgumentError as e:
+   1866     # Convert to ValueError for backwards compatibility.
+-> 1867     raise ValueError(str(e))
+   1868 
+   1869   return c_op
+
+ValueError: Cannot reshape a tensor with 6 elements to shape [3,5] (15 elements) for 'Reshape' (op: 'Reshape') with input shapes: [6], [2] and with input tensors computed as partial shapes: input[1] = [3,5].
+
+In [13]: b =tf.reshape(a,(2,3))
+
+In [14]: b.eval()
+Out[14]: 
+array([[1., 1., 1.],
+       [1., 1., 1.]], dtype=float32)
+
+In [15]: b =tf.reshape(a,(2,3,1))
+
+In [16]: b.eval()
+Out[16]: 
+array([[[1.],
+        [1.],
+        [1.]],
+
+       [[1.],
+        [1.],
+        [1.]]], dtype=float32)
+
+In [17]: b =tf.reshape(a,(1,2,3))
+
+In [18]: b.eval()
+Out[18]: 
+array([[[1., 1., 1.],
+        [1., 1., 1.]]], dtype=float32)
+
+In [19]: b =tf.reshape(a,(3,2,1))
+
+In [20]: b.eval()
+Out[20]: 
+array([[[1.],
+        [1.]],
+
+       [[1.],
+        [1.]],
+
+       [[1.],
+        [1.]]], dtype=float32)
+
+tf.reshape()
+tf.expand_dims()    add an extra dimension to a tensor of size 1.
+        tf.squeeze()            remove all dimensions of size 1.
